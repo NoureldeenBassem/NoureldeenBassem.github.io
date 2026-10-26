@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Noureldin Bassem Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="AI, Machine Learning and Deep Learning projects by Noureldin Bassem Mohamed, Computer and Intelligent Systems Engineering student at Future University in Egypt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500&display=swap">
+<style>
+/* Layout: dark-first engineering console. Photo + thesis hero, a ranked project ledger (01-08 featured, then a filterable index), then credentials. */
+:root{
+  --bg:#0B0B10; --surface:#14141A; --card:#1B1B22; --line:#262B38;
+  --fg:#F1F5F9; --muted:#9AA6B8; --accent:#3B82F6; --accent-soft:rgba(59,130,246,.14); --on-accent:#05070D;
+  --good:#34D399;
+  --f-display:"Exo","Segoe UI",system-ui,sans-serif;
+  --f-body:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:10px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#F7F8FA; --surface:#FFFFFF; --card:#FFFFFF; --line:#DDE3EC;
+  --fg:#0B1220; --muted:#4A5568; --accent:#1D5FD6; --accent-soft:rgba(29,95,214,.10); --on-accent:#FFFFFF; --good:#0F8A5F;
+  color-scheme:light }}
+:root[data-theme="light"]{
+  --bg:#F7F8FA; --surface:#FFFFFF; --card:#FFFFFF; --line:#DDE3EC;
+  --fg:#0B1220; --muted:#4A5568; --accent:#1D5FD6; --accent-soft:rgba(29,95,214,.10); --on-accent:#FFFFFF; --good:#0F8A5F;
+  color-scheme:light }
+
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px}
+.brand{font-family:var(--f-display);font-weight:700;letter-spacing:.02em;text-decoration:none}
+.brand span{color:var(--accent)}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.nav ul a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;text-decoration:none;color:var(--muted);font-size:14px;border-radius:8px;transition:color .2s,background .2s}
+.nav ul a:hover{color:var(--fg);background:var(--accent-soft)}
+@media (max-width:720px){.nav ul{display:none}}
+
+/* hero */
+.hero{padding-block:56px 40px}
+.hero-grid{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:center}
+.photo{width:220px;max-width:100%;aspect-ratio:1;border-radius:18px;object-fit:cover;border:1px solid var(--line);box-shadow:0 0 0 6px var(--accent-soft)}
+.hero h1{font-size:clamp(34px,5vw,54px);font-weight:800;line-height:1.05;letter-spacing:-.01em}
+.role{font-family:var(--f-mono);color:var(--accent);font-size:15px;margin:12px 0 16px}
+.thesis{color:var(--muted);max-width:62ch;margin:0}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-size:14px;font-weight:500;cursor:pointer;background:transparent;color:var(--fg);font-family:var(--f-body);transition:border-color .2s,background .2s,transform .2s}
+.btn:hover{border-color:var(--accent);background:var(--accent-soft)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn svg{width:18px;height:18px;flex:none}
+@media (max-width:720px){.hero{padding-block:32px 24px}.hero-grid{grid-template-columns:1fr;gap:20px}.photo{width:140px}}
+
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);background:var(--surface);margin-top:8px}
+.fact{padding:18px 20px;border-left:1px solid var(--line);min-width:0}
+.fact:first-child{border-left:0}
+.fact b{display:block;font-family:var(--f-display);font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}
+.fact span{color:var(--muted);font-size:13px}
+@media (max-width:720px){.facts{grid-template-columns:repeat(2,1fr)}.fact:nth-child(3){border-left:0}.fact:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* sections */
+section{padding-block:48px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.sec-head h2{font-size:clamp(24px,3vw,32px);font-weight:700}
+.sec-head p{color:var(--muted);margin:6px 0 0;max-width:60ch}
+
+/* featured ledger */
+.ledger{display:flex;flex-direction:column;gap:14px}
+.proj{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:22px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);transition:border-color .25s,transform .25s}
+.proj:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.rank{font-family:var(--f-mono);font-size:22px;color:var(--accent);font-weight:500;padding-top:2px}
+.proj-body{min-width:0}
+.proj-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.proj h3{font-size:20px;font-weight:700;line-height:1.25}
+.metric{font-family:var(--f-mono);font-size:13px;color:var(--good);border:1px solid color-mix(in srgb,var(--good) 40%,transparent);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px;padding:0;list-style:none}
+.tags li{font-family:var(--f-mono);font-size:12px;color:var(--muted);background:var(--accent-soft);border-radius:6px;padding:3px 8px}
+.proj ul.pts{margin:0;padding-left:18px;color:var(--fg)}
+.proj ul.pts li{margin:4px 0;color:color-mix(in srgb,var(--fg) 86%,var(--muted))}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.links .btn{min-height:40px;font-size:13px;padding:0 14px}
+@media (max-width:560px){.proj{grid-template-columns:1fr;gap:6px;padding:18px}.rank{font-size:16px}}
+
+/* index */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);font:500 13px var(--f-body);cursor:pointer;transition:all .2s}
+.chip:hover{color:var(--fg);border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.mini{display:flex;flex-direction:column;gap:8px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);min-width:0}
+.mini-top{display:flex;gap:10px;align-items:baseline}
+.mini .n{font-family:var(--f-mono);font-size:13px;color:var(--accent);flex:none;font-variant-numeric:tabular-nums}
+.mini h3{font-size:16px;font-weight:600;line-height:1.3}
+.mini p{margin:0;color:var(--muted);font-size:14px}
+.mini .cat{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mini .links{margin-top:auto;padding-top:4px}
+.mini .links a{font-size:13px;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:32px}
+.mini .links a:hover{text-decoration:underline}
+
+/* two-column info */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:22px;min-width:0}
+.panel h3{font-size:18px;margin-bottom:14px}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:12px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0;padding-top:0}
+.row b{font-weight:500}
+.row time,.row .when{font-family:var(--f-mono);font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.row p{grid-column:1/-1;margin:0;color:var(--muted);font-size:14px}
+.skills{display:grid;gap:14px}
+.skills div{display:grid;grid-template-columns:170px 1fr;gap:12px}
+.skills dt{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.skills dd{margin:0;min-width:0}
+@media (max-width:560px){.skills div{grid-template-columns:1fr;gap:4px}}
+
+/* contact */
+.contact{border-top:1px solid var(--line);padding-block:40px 56px}
+.contact-grid{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.copyline{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:4px 4px 4px 16px;font-family:var(--f-mono);font-size:14px;user-select:all;max-width:100%}
+.copyline span{overflow-wrap:anywhere}
+.copyline button{min-height:36px}
+.toast{color:var(--good);font-size:13px;min-height:20px;margin-top:10px}
+footer{color:var(--muted);font-size:13px;padding-block:0 32px}
+
+@media (prefers-reduced-motion:no-preference){
+  .reveal{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">N<span>.</span>Bassem</a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#all">All work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <img class="photo" src="photo.jpg" alt="Portrait of Noureldin Bassem Mohamed" width="220" height="220">
+        <div>
+          <p class="label">Computer and Intelligent Systems Engineering · FUE</p>
+          <h1>Noureldin Bassem Mohamed</h1>
+          <p class="role">AI · Machine Learning · Deep Learning Engineer</p>
+          <p class="thesis">Fifth-year engineering student ranked 1st across all engineering departments. I build AI systems end to end, from YOLOv8 medical image detection and RAG assistants to an underwater robot that sees, and I ship them as working apps.</p>
+          <div class="ctas">
+            <a class="btn primary" href="#projects">See projects</a>
+            <a class="btn" href="https://github.com/NoureldeenBassem" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/noureldeen-bassem-3a4658367" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="facts" role="list">
+        <div class="fact" role="listitem"><b>3.97</b><span>CGPA out of 4.00</span></div>
+        <div class="fact" role="listitem"><b>#1</b><span>Rank, all engineering departments</span></div>
+        <div class="fact" role="listitem"><b>1st</b><span>NFTE Egypt 2026, Global Finals</span></div>
+        <div class="fact" role="listitem"><b>40+</b><span>AI, data and robotics projects</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>Featured projects</h2>
+          <p>Ranked by difficulty and impact, hardest first.</p>
+        </div>
+      </div>
+      <div class="ledger" id="ledger"></div>
+    </div>
+  </section>
+
+  <section id="all">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>All work</h2>
+          <p>Every other project, continuing the ranking from 09.</p>
+        </div>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter projects by area"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap cols">
+      <div class="panel">
+        <h3>Experience</h3>
+        <div class="row"><b>AI Intern, CIB (Commercial International Bank)</b><span class="when">Jul 2026</span>
+          <p>Summer Internship Program 2026, AI track. Passed the Generative AI final assessment; trained in data analytics, ML, fraud risk, AI governance and ESG.</p></div>
+        <div class="row"><b>AI Intern, Instant Software Solutions</b><span class="when">Oct 2026</span>
+          <p>Built projects in transformers and RAG: fine-tuned DistilBERT for question answering and built a cited multilingual RAG assistant.</p></div>
+        <div class="row"><b>President, Future Vision Club, FUE</b><span class="when">Current</span>
+          <p>Lead the university's competitions program: find national and international competitions, select the strongest students and represent FUE.</p></div>
+      </div>
+      <div class="panel">
+        <h3>Education and awards</h3>
+        <div class="row"><b>B.Sc. Computer and Intelligent Systems Engineering, FUE</b><span class="when">2022 – 2027</span>
+          <p>CGPA 3.97/4.00, ranked 1st across all engineering departments.</p></div>
+        <div class="row"><b>AI and Data Science Diploma (170 h), Instant Software Solutions</b><span class="when">Sep 2026</span>
+          <p>"Top One" Certificate of Achievement for the highest performance.</p></div>
+        <div class="row"><b>1st Place, NFTE Egypt 2026 (ESB Competition)</b><span class="when">Sep 2026</span>
+          <p>Team Leader of WattWise; qualified for the NFTE Global Finals.</p></div>
+        <div class="row"><b>2nd of 19 Teams, RoboDam2026, Smart Systems</b><span class="when">Sep 2026</span></div>
+        <div class="row"><b>HCIA-AI V4.0, Huawei ICT Academy</b><span class="when">Sep 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Skills</h2></div></div>
+      <dl class="panel skills">
+        <div><dt>AI and ML</dt><dd>Deep Learning, CNNs, LSTMs, Transformers, Transfer Learning, Object Detection, RAG, NLP, Computer Vision, Generative AI</dd></div>
+        <div><dt>Libraries</dt><dd>TensorFlow, Keras, PyTorch, Hugging Face, YOLOv8, ChromaDB, Scikit-learn, XGBoost, LightGBM, Optuna, SHAP, Pandas, NumPy, Streamlit</dd></div>
+        <div><dt>Data</dt><dd>SQL Server, Power BI, DAX, Power Query, Excel, EDA, Data Cleaning</dd></div>
+        <div><dt>Robotics</dt><dd>ROS2, ESP32, STM32, Arduino, IoT, Sensors, MATLAB, Proteus</dd></div>
+        <div><dt>Languages</dt><dd>Python, C++, SQL, MATLAB, JavaScript · Arabic (native), English (fluent)</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Get in touch</h2><p>Open to AI, Machine Learning and Deep Learning roles and internships.</p></div></div>
+      <div class="contact-grid">
+        <div class="copyline"><span id="email">noureldinbassem.work@gmail.com</span><button class="btn" type="button" id="copy-email" data-copy="email">Copy</button></div>
+        <div class="copyline"><span id="phone">+20 104 097 1933</span><button class="btn" type="button" id="copy-phone" data-copy="phone">Copy</button></div>
+      </div>
+      <p class="toast" id="toast" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+  <footer><div class="wrap">New Cairo, Egypt · Noureldin Bassem Mohamed</div></footer>
+</main>
+
+<script>
+const GH = "https://github.com/NoureldeenBassem/";
+const featured = [
+  {t:"Hospital AI System", sub:"AI Diploma Graduation Project", m:"mAP50 0.444", tags:["YOLOv8","PyTorch","Gradient Boosting","Power BI","Streamlit"],
+   pts:["Trained YOLOv8 to detect 13 types of chest X-ray abnormality with bounding boxes, using oversampling and test-time augmentation.",
+        "Built an insurance premium prediction model that explains the top cost drivers for each patient.",
+        "Cleaned 800,000 hospital records for a Power BI KPI dashboard; both models run in a login-protected Streamlit app with automated tests."],
+   live:"https://hospital-ai-system-ittpjqzayzrksvshjmbncs.streamlit.app/"},
+  {t:"WattWise: AI-Powered Smart Energy Meter", sub:"Team Leader", m:"1st NFTE Egypt", tags:["IoT","Sensors","Machine Learning"],
+   pts:["Led a 4-member team building a smart energy meter that tracks home usage live, predicts the monthly bill with AI and suggests a budget-based appliance schedule.",
+        "Won 1st place at NFTE Egypt 2026 (qualified for the Global Finals) and 2nd of 19 teams in the RoboDam2026 Smart Systems track."]},
+  {t:"Underwater ROV with AI Vision", sub:"MATE ROV Egypt 2026, Pioneer Class, Team Leader", m:"23-member team", tags:["Computer Vision","AI","Robotics","Embedded Systems"],
+   pts:["Led a 23-member FUE team to build and operate an ROV for science and offshore energy missions at AASTMT, Alexandria.",
+        "Developed an AI computer vision system on the ROV camera to detect underwater objects and marine species in real time.",
+        "Built tools for marine sampling, 3D coral photogrammetry, subsea servicing and an under-ice profiling float."]},
+  {t:"Football Injury RAG Assistant", sub:"Retrieval-augmented generation", m:"35,597 chunks", tags:["RAG","ChromaDB","BGE Embeddings","Gemini","Streamlit"],
+   pts:["Answers injury prevention, rehab and recovery questions with cited sources, in English, Arabic and Franco-Arab.",
+        "Indexed 5,700+ PubMed Central papers, FIFA 11+ manuals and injury records in ChromaDB."],
+   live:"https://football-injury-rag-bjksluynp5svis9ucrcqhz.streamlit.app/"},
+  {t:"Credit Risk Scoring Neural Network", sub:"Production-style deployment", m:"ROC-AUC 0.86", tags:["Keras","REST API","Streamlit"],
+   pts:["Rates customers as Poor, Standard or Good after repairing heavily corrupted financial data from each customer's own history.",
+        "One scoring package behind a Streamlit app, a REST API and a batch scoring CLI."]},
+  {t:"Olist E-Commerce Sales Analysis", sub:"ODC Graduation Project", m:"112,650 orders", tags:["SQL Server","Python","Power BI","Streamlit"],
+   pts:["Merged 9 tables into a star schema in SQL Server, then cleaned, analyzed and engineered features in Python.",
+        "Late-delivery risk model (ROC-AUC 0.77) and K-Means customer segments, deployed in Streamlit beside a Power BI KPI dashboard."]},
+  {t:"Online Transaction Fraud Detection", sub:"IEEE-CIS dataset", m:"Ensemble + SHAP", tags:["LightGBM","XGBoost","Optuna","SHAP","Streamlit"],
+   pts:["LightGBM and XGBoost ensemble with transaction velocity features and Optuna tuning, explained with SHAP.",
+        "Streamlit app with a live predictor, model performance dashboard and EDA explorer."]},
+  {t:"Brain Tumor MRI Classification", sub:"Transfer learning", m:"91.0% accuracy", tags:["TensorFlow","Keras","MobileNetV2"],
+   pts:["Fine-tuned MobileNetV2 on 4 MRI classes: 0.904 macro F1 and 0.989 ROC-AUC on 1,311 unseen test images.",
+        "Compared feature extraction with fine-tuning and analyzed error patterns per tumor class."]},
+];
+const more = [
+  ["Bank Term Deposit Targeting","Machine Learning","ANN ranking 45,211 clients before dialing; the top 10% holds 45% of subscribers (4.5x lift)."],
+  ["Student Outcome Prediction","Machine Learning","Multiclass neural network for dropout, enrolled or graduate (macro F1 0.719, ROC-AUC 0.889)."],
+  ["Question Answering with DistilBERT","NLP","Fine-tuned DistilBERT on SQuAD to extract answer spans, evaluated with Exact Match and F1."],
+  ["Waste Sorting Image Classifier","Deep Learning","12 recycling categories with two-phase transfer learning (94.2% accuracy)."],
+  ["Scene Classification","Deep Learning","6 natural scene types, 93.0% accuracy and 0.932 macro F1 on 3,000 test photos.",{live:"https://scene-classification-using-cnn-2f5pzdhy2it8yqsbfdwchl.streamlit.app/"}],
+  ["Weather Condition Classification","Deep Learning","11 weather conditions from camera photos, 87.2% accuracy.",{live:"https://weather-condition-classification-avaawsryqx5wxhbg636xh3.streamlit.app/"}],
+  ["IoT Home Security and Safety System","Robotics","ESP32-CAM face detection with PIR, door, gas and flame sensors; alerts and photos via Telegram."],
+  ["6-DoF Robotic Arm","Robotics","Forward and inverse kinematics in MATLAB, controlling all six axes on Arduino."],
+  ["Telco Customer Churn Prediction","Machine Learning","Compared three models, chose XGBoost on F1 and PR-AUC and deployed it on Streamlit."],
+  ["Sign Language Letter Recognition","Deep Learning","CNN designed and trained from scratch for 24 ASL letters."],
+  ["Dogs vs Cats Classifier","Deep Learning","Fine-tuned MobileNetV2 with a tuned threshold, 0.99 macro F1 on 2,495 test images."],
+  ["Hotel Booking Cancellation Prediction","Machine Learning","XGBoost with a custom frequency encoder (F1 0.755).",{gh:"Hotel-Bookings-Cancelling-Prediction"}],
+  ["Musk Molecule Classification","Machine Learning","SVM with PCA and group-aware splitting to prevent data leakage.",{gh:"musk-molecule-classifier"}],
+  ["Sentiment Analysis with LSTM","NLP","LSTM text classifier, 0.82 accuracy and 0.89 ROC-AUC."],
+  ["Next Word Prediction","NLP","LSTM language model suggesting the top 3 next words (54.7% top-3 accuracy).",{live:"https://next-word-prediction-lstm-yjzz2rdpl7mziemh36g5ey.streamlit.app/"}],
+  ["Patient Severity Classification","Machine Learning","Imbalanced multiclass pipeline with SMOTE, comparing Random Forest, SVM and Logistic Regression.",{gh:"Patient-Severity-Classification"}],
+  ["Student Grade Prediction","Machine Learning","Random Forest on the UCI student dataset (R² 0.83)."],
+  ["House and Used Car Price Prediction","Machine Learning","Linear, polynomial, regularized and tree models compared for price regression."],
+  ["Customer Segmentation","Machine Learning","Mall and wholesale customers segmented with K-Means and DBSCAN, each cluster profiled."],
+  ["Healthcare Analytics Dashboard","Data and BI","Multi-page Power BI dashboard on 55,500 patient records."],
+  ["Retail Sales Star Schema Dashboard","Data and BI","200K sales rows modeled in a star schema with DAX measures across four cities."],
+  ["Smart Healthcare Analysis","Data and BI","800K-row hospital dataset analyzed against a business requirements document."],
+  ["SQL Database Analysis","Data and BI","Analytical queries on the Northwind and Chinook databases and hotel booking KPIs."],
+  ["Smart Garage System","Robotics","STM32 gate with keypad password, LCD, servo, and IR and ultrasonic car counting."],
+  ["Medicine Reminder","Robotics","STM32 reminder with LCD and keypad; the buzzer stops when the patient comes close."],
+  ["Student Burnout Classification","Machine Learning","Decision Tree and Logistic Regression classifier deployed on Streamlit."],
+  ["Possum Age Prediction","Machine Learning","KNN regressor estimating age from body measurements."],
+  ["Rose Color Classification","Deep Learning","CNN that identifies rose colors from photos."],
+  ["Exploratory Data Analysis Projects","Data and BI","Hotel demand, cafe sales, Spotify, e-commerce, HR attrition, Superstore and student performance."],
+  ["Password-Protected Door Lock","Robotics","Servo lock opened by keypad password, with buzzer feedback."],
+  ["Line Follower Car","Robotics","Autonomous car using IR sensors and an L298N motor driver."],
+  ["Sound and Multistage Amplifiers","Electronics","Audio amplifiers designed with transistors and op-amps."],
+  ["Arithmetic Logic Unit (ALU)","Electronics","CPU component performing arithmetic and logic operations on binary data."],
+  ["Web Scraping","Data and BI","Scraped 100 quotes across 10 pages with BeautifulSoup and exported to Excel."],
+];
+
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const iconExt = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>';
+const iconGh = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>';
+const pad = n => String(n).padStart(2,"0");
+
+document.getElementById("ledger").innerHTML = featured.map((p,i) => {
+  const links = [];
+  if (p.live) links.push(`<a class="btn primary" href="${p.live}" target="_blank" rel="noopener">${iconExt}Live app</a>`);
+  if (p.gh) links.push(`<a class="btn" href="${GH+p.gh}" target="_blank" rel="noopener">${iconGh}Code</a>`);
+  return `<article class="proj reveal" style="animation-delay:${i*60}ms">
+    <div class="rank" aria-label="Rank ${i+1}">${pad(i+1)}</div>
+    <div class="proj-body">
+      <div class="proj-top"><div><h3>${esc(p.t)}</h3><div class="label" style="margin-top:4px">${esc(p.sub)}</div></div><span class="metric">${esc(p.m)}</span></div>
+      <ul class="tags">${p.tags.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
+      <ul class="pts">${p.pts.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      ${links.length?`<div class="links">${links.join("")}</div>`:""}
+    </div></article>`;
+}).join("");
+
+const cats = ["All", ...new Set(more.map(m=>m[1]))];
+const filters = document.getElementById("filters");
+const grid = document.getElementById("grid");
+let current = "All";
+try { const saved = localStorage.getItem("pf-filter"); if (saved && cats.includes(saved)) current = saved; } catch(e) {}
+function renderGrid(){
+  grid.innerHTML = more.map((m,i)=>({m,n:i+featured.length+1})).filter(x=>current==="All"||x.m[1]===current).map(({m,n})=>{
+    const o = m[3]||{}; const links=[];
+    if (o.live) links.push(`<a href="${o.live}" target="_blank" rel="noopener">${iconExt.replace('aria-hidden','width="14" height="14" aria-hidden')}Live app</a>`);
+    if (o.gh) links.push(`<a href="${GH+o.gh}" target="_blank" rel="noopener">${iconGh.replace('aria-hidden','width="14" height="14" aria-hidden')}Code</a>`);
+    return `<article class="mini"><div class="mini-top"><span class="n">${pad(n)}</span><h3>${esc(m[0])}</h3></div>
+      <span class="cat">${esc(m[1])}</span><p>${esc(m[2])}</p>${links.length?`<div class="links">${links.join("")}</div>`:""}</article>`;
+  }).join("");
+  filters.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.cat===current)));
+}
+filters.innerHTML = cats.map((c,i)=>`<button class="chip" type="button" id="f-${i}" data-cat="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join("");
+filters.addEventListener("click", e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  current = b.dataset.cat; try { localStorage.setItem("pf-filter", current); } catch(e) {}
+  renderGrid();
+});
+renderGrid();
+
+const toast = document.getElementById("toast");
+document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("click", ()=>{
+  const el = document.getElementById(btn.dataset.copy); const text = el.textContent;
+  const done = ()=>{ toast.textContent = "Copied " + text; };
+  const fallback = ()=>{ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast.textContent="Selected. Press Ctrl+C to copy."; };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch(e) { fallback(); }
+}));
+</script>
+
+</body>
+</html>
